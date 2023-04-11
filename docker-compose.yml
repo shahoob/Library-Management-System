@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  server:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - SESSION_SECRET=<insert secret here>
+      - ADMIN_SECRET=<insert another secret here>
+      - DB_URL=mongodb://root:example@db:27017/
+      # or mongodb://<username>:<password>@<server hostname>:<port>/
+    networks:
+      - DB-server
+    ports:
+      - 3000:3000 # or 3000:<any port>
+  db:
+    image: mongo
+    volumes:
+      # store in volume "db_data" with contents of directory "/data/db" and let this container write to it also.
+      - db_data:/data/db:rw
+    networks:
+      - DB-server
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+networks:
+  DB-server:
+
+volumes:
+  db_data:
