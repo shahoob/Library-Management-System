@@ -16,7 +16,7 @@
     "dev:windows": "SET NODE_ENV=dev && nodemon server.js"
   },
   "author": "Azad Mamun",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^3.1.1",
